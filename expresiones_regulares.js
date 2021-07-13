@@ -199,3 +199,90 @@ let timStr = "Timmmmber";
 let timRegex = /Tim{4}ber/; // Cambia esta línea
 let result13 = timRegex.test(timStr);
 console.log(result13);
+
+//comprueba todos o ninguno
+//A veces los patrones que se desea buscar pueden tener partes o no existir. Sin embargo, podría
+//ser importante buscarlos de todas maneras.
+//Para especificar la existencia de un elemento se usa el signo "?", esto comprueba 0 o 1 de los
+//elementos precedentes. 
+//ejemplo
+let american = "color";
+let british = "colour";
+let rainbowRegex= /colou?r/;
+console.log(rainbowRegex.test(american));
+console.log(rainbowRegex.test(british));
+
+//ejercicios
+let favWord = "favorite";
+let favRegex = /favou?rite/gi; // verifica si existe la "u" despues de "o"
+let result14 = favRegex.test(favWord);
+console.log(result14);
+
+//LookaHead
+//son patrones que le indican a JS que busque por anticipado en la cadenas verificar patrones para 
+//más adelante. Puede ser útil cuando se desea buscar patrones sobre la misma cadena
+//Existe dos tipos: lookahead positivo y negativo
+//lookahead positivo -> buscara asegurarse de que el elementro en el patrón  de busqueda esta allí, pero
+//en realidad no lo coincidira. Se usa como "(?=...)"
+//lookahead negativo -> buscara para asegurarse de que el elemento en el patrón de búsqueda no este allí
+//ejemplo
+let quit = "qu";
+let noquit = "qt";
+let quRegex= /q(?=u)/;
+let qRegex = /q(?!u)/;
+console.log(quit.match(quRegex))
+console.log(noquit.match(qRegex));
+
+//verificador de constraseñas simple que busca 3 y 6 caracteres y al menos un número
+let pass = "1a2b3c";
+let checkPass = /(?=\w{3,6})(?=\D*\d)/
+console.log(checkPass.test(pass))
+
+//ejercicios
+//Utiliza los lookaheads en el pwRegex para que coincida con las contraseñas que 
+//tengan más de 5 caracteres y dos dígitos consecutivos.
+let sampleWord = "bana12";
+let pwRegex = /(?=\w{5,})(?=\D*\d{2})/; // Cambia esta línea
+let result15 = pwRegex.test(sampleWord);
+console.log(result15)
+
+//comprueba agrupaciones mixtas de caracteres
+//a veces se desea comprobar grupos de caracteres utlizando una expresión regular y
+//para conseguirlo usamos paréntesis ()
+//ejemplo
+//i deseas encontrar Penguin o Pumpkin en una cadena, 
+//puedes usar la siguiente expresión regular: /P(engu|umpk)in/g
+let testStr = "Pumpkin";
+let testRegex = /P(engu|umpk)in/;
+console.log(testRegex.test(testStr));
+
+//ejercicios
+//Corrige la expresión regular para que compruebe los nombres de 
+//Franklin Roosevelt o Eleanor Roosevelt de una manera sensible a 
+//mayúsculas y minúsculas y haciendo concesiones para los segundos nombres.
+let myString = "Eleanor Roosevelt";
+let myRegex1 = /(Eleanor|Franklin).* Roosevelt/; // Cambia esta línea
+let result17 = myRegex1.test(myString);
+console.log(result17);
+
+//reutiliza patrones usando grupos de captura
+//algunos patrones que se busque aparecerena multiples veces en una cadena
+//y es un desperdicio repetir manualmente esa expresión regular
+//se puede usar subcadenas repetidas utilizando grupos de captura, los 
+//parentesis son usados para encontrar subcadenas repetidas
+//para especificar donde aparecera esa cadena repetida, se usa la barra invertida
+//y luego un número, ejemplo \1 una vez
+//ejemplo
+let repeatStr = "regex regex";
+let repeatRegex = /(\w+)\s\1/;
+console.log(repeatRegex.test(repeatStr));
+console.log(repeatStr.match(repeatRegex));
+
+//ejercicio
+//Utiliza los grupos de captura en reRegex para que coincida con una cadena que 
+//conste sólo del mismo número repetido exactamente tres veces separado por espacios.
+let repeatNum = "42 42 42";
+let reRegex3 = /^([0-9]+)\s\1\s\1$/; // Cambia esta línea
+let result18 = reRegex3.test(repeatNum);
+console.log(result18)
+
